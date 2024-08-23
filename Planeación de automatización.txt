@@ -1,0 +1,37 @@
+Antes de automatizar es recomendable definir OBJETIVOS.
+
+Ejemplo Objetivo: Mejorar la Eficiencia y Efectividad de las pruebas Automatizadas para salir mas rapido al mercado.
+	Sub ojetivo-Aumentar la cobertura de pruebas automatizadas.
+	Metricas: Automatizar el 50% de las pruebas automatizables dentro de la regresión para un periodo del año de la empresa.
+	
+	Sub Objetivo-Reducir el tiempo de ejecucón de las pruebas de regresión.
+	Metricas: Lograr una reduccion del 15% en el tiempo total de la ejecucón de las pruebas de regresión.
+	
+QUE HACER?
+	Identifique de esas pruebas cuales son automatizables y cuales no, marquelas como "candidatos para automatizar.
+	Defina valores de prioridad de esas pruebas.
+	-Cuales son las pruebas que se pueden automatizar y cuales tienen mas prioridad.
+	
+PLANEAR: Definir tiempo, complejidad y prioridad.
+
+CONTROL: Revisar avance y comunicar si requiere tiempo o recursos.
+
+MANUAL VS AUTOMATIZADO PARA VER EL BENEFICIO, MOSTRAR REPORTES.
+
+CANDIDATOS A AUTOMARIZAR: Funcionalidades estables y repetibles, casos criticos, escenarios que requieren esfuerzo.
+
+CHECKLIST DE CRITERIOS DE AUTOMATIZACIÓN:
+La prueba se ejecuta mas de una vez?
+La prueba cubre un flujo de negocio critico?
+Requiere mucho esfuerzo y tiempo ejecutar la prueba manualmente?
+La prueba requiere combinaciones de datos usando los mismo datos?(data-driven)
+La caractersitica a probar es estable?
+
+
+
+Paginas para practicar: https://federico-toledo.com/sitios-de-prueba-para-practicar/
+//**Paginasdeprueba:
+https://demoqa.com/profile
+//https://opencart.abstracta.us/->colocaruncelyhayfiltros:
+//https://testsheepnz.github.io/BasicCalculator.html
+//https://www.demoblaze.com/index.html
