@@ -29,9 +29,3 @@ La caractersitica a probar es estable?
 
 
 
-Paginas para practicar: https://federico-toledo.com/sitios-de-prueba-para-practicar/
-//**Paginasdeprueba:
-https://demoqa.com/profile
-//https://opencart.abstracta.us/->colocaruncelyhayfiltros:
-//https://testsheepnz.github.io/BasicCalculator.html
-//https://www.demoblaze.com/index.html

@@ -6,7 +6,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+import java.time.Duration;
+import java.time.Instant;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -25,7 +32,9 @@ public class NavegateTest {
 //Test para practicar selectores
     @Test
     public void navegateToRegister() throws InterruptedException {
-        driver.get("https://demo.automationtesting.in/Register.html");
+       // driver.get("https://demo.automationtesting.in/Register.html");
+   //OTRA FORMA DE NAVEGAR:
+        driver.navigate().to("https://demo.automationtesting.in/Register.html");
 
 //====================  Xpath - Ctrl+F: ==================================
         //Buscar por el nombre del atributo elemento[@propiedad/atributo='nombreDePropiedad']
@@ -104,9 +113,106 @@ public class NavegateTest {
         //Escoger por value, hace referencia al valor de la propiedad en html:
         selectWeb.selectByValue("0");
         Thread.sleep(3000);
+    }
+//============ ESPERAS ============================================
+    //Implícitas: nos permite indicar al WebDriver cuanto debe esperar por un elemento antes de arrojar una excepción
+    // al no encontrar el elemento, este tiempo es usado por WebDriver para todos los elementos.
+
+    @Test
+    public void implicitWaitExample() {
+        driver.get("https://www.google.com");
+        driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
+
+        Instant start = Instant.now();
+
+        try {
+            driver.findElement(By.id("//img[@alt='Google']ERROR"));
+        } catch (Exception exc) {
+            Instant end = Instant.now();
+            Duration timeElapsed = Duration.between(start, end);
+            System.out.println("************************");
+            System.out.println("time 1: " + timeElapsed.getSeconds() + " seconds");
+            System.out.println("************************");
+
+        }
+        start = Instant.now();
+        try {
+            driver.findElement(By.id("//img[@alt='Google']ERROR"));
+        } catch (Exception exc) {
+            Instant end = Instant.now();
+            Duration timeElapsed = Duration.between(start, end);
+            System.out.println("************************");
+            System.out.println("time 2: " + timeElapsed.getSeconds() + " seconds");
+        }
+    }
+    //La espera por defecto es 0 si no colocamos nada:
+    @Test
+    public void defaultWait(){
+        driver.get("https://www.google.com");
+        Instant start = Instant.now();
+        try {
+            driver.findElement(By.id("//img[@alt='Google']ERROR"));
+        } catch (Exception exc) {
+            Instant end = Instant.now();
+            Duration timeElapsed = Duration.between(start, end);
+            System.out.println("************************");
+            System.out.println("time 1: " + timeElapsed.getSeconds() + " seconds");
+            System.out.println("************************");
+        }
+
+    }
+
+    //Esperas explícitas: Nos permite indicar al WebDriver cuanto debe esperar por un elemento de forma
+    //específica hasta que una condición específica se cumpla. Dicha condición es llamada con cierta
+    //frecuencia hasta que transcurre el tiempo de espera.
+    //condiciones de espera: https://github.com/SeleniumHQ/selenium/blob/trunk/java/src/org/openqa/selenium/support/ui/ExpectedConditions.java
+    @Test
+    public void explicitWaitExample(){
+        driver.get("https://www.google.com");
+        driver.manage().timeouts().implicitlyWait(5L, TimeUnit.SECONDS);
+        Instant start = Instant.now();
+        try {
+            driver.findElement(By.id("//img[@alt='Google']ERROR"));
+        } catch (Exception exc) {
+            Instant end = Instant.now();
+            Duration timeElapsed = Duration.between(start, end);
+            System.out.println("************************");
+            System.out.println("time 1: " + timeElapsed.getSeconds() + " seconds");
+            System.out.println("************************");
+        }
+        //Se recomienda colocar en partes especificas donde sabemos que va demorar en cargar
+        Instant start2 = Instant.now();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10L));
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.id("//img[@alt='Google']ERROR")));
+        } catch (Exception exc) {
+            Instant end = Instant.now();
+            Duration timeElapsed = Duration.between(start2, end);
+            System.out.println("************************");
+            System.out.println("time explicit: " + timeElapsed.getSeconds() + " seconds");
+            System.out.println("************************");
+        }
+
 
     }
 
 
 
-}
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+

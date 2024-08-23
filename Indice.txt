@@ -1,6 +1,27 @@
+ALT+CTRL+L -> IDENTAR/ESPACIO DEL CODIGO 
 
 
-1: selenium-basic 
+1: Selectores -> selenium-basic (gradle -> dependencias de Selenium Java y WebDriverManager)
+	-Xpath,CSS selector
+	-Assert()
+	-Manejo de Select
+	-Esperas
+	-Radiobutton falta***
+	-
+
+
+
 	
 
 
+
+Paginas para practicar: https://federico-toledo.com/sitios-de-prueba-para-practicar/
+//**Paginasdeprueba:
+https://demoqa.com/profile
+//https://opencart.abstracta.us/->colocaruncelyhayfiltros:
+//https://testsheepnz.github.io/BasicCalculator.html
+//https://www.demoblaze.com/index.html
+
+
+Información de assertions: https://junit.org/junit5/docs/5.0.1/api/org/junit/jupiter/api/Assertions.html
+Condiciones de espera: https://github.com/SeleniumHQ/selenium/blob/trunk/java/src/org/openqa/selenium/support/ui/ExpectedConditions.java
