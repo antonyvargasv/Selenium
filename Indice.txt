@@ -5,7 +5,7 @@ ALT+CTRL+L -> IDENTAR/ESPACIO DEL CODIGO
 	-Xpath,CSS selector
 	-Assert()
 	-Manejo de Select
-	-Esperas
+	-Esperas (Implicitas,Explicitas,fluent)
 	-Radiobutton falta***
 	-
 

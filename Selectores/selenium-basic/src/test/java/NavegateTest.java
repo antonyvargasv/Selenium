@@ -3,16 +3,19 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 import java.time.Duration;
 import java.time.Instant;
+
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -192,9 +195,65 @@ public class NavegateTest {
             System.out.println("time explicit: " + timeElapsed.getSeconds() + " seconds");
             System.out.println("************************");
         }
-
-
     }
+    @Test
+    public void explicitWaitExamplevsImplicit(){
+        driver.get("https://www.google.com");
+        driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
+        Instant start = Instant.now();
+        try {
+            driver.findElement(By.id("//img[@alt='Google']ERROR"));
+        } catch (Exception exc) {
+            Instant end = Instant.now();
+            Duration timeElapsed = Duration.between(start, end);
+            System.out.println("************************");
+            System.out.println("time 1: " + timeElapsed.getSeconds() + " seconds");
+            System.out.println("************************");
+        }
+        //Se recomienda colocar en partes especificas donde sabemos que va demorar en cargar
+        Instant start2 = Instant.now();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5L));
+        try {
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.id("//img[@alt='Google']ERROR")));
+        } catch (Exception exc) {
+            Instant end = Instant.now();
+            Duration timeElapsed = Duration.between(start2, end);
+            System.out.println("************************");
+            System.out.println("time explicit: " + timeElapsed.getSeconds() + " seconds");
+            System.out.println("************************");
+        }
+    }
+
+    //Fluent waits, nos permite definir el tiempo máximo a esperar por una determinada condición del elemento.
+    //También nos permite definir la frecuencia con la que el driver validará si la condición se cumple antes de arrojar una excepción
+    //normalmente la frecuencia es de 500 milisegundos pero con Fluent waits se puede cambiar.
+    @Test
+    public void fluentWaitExample(){
+        driver.get("https://www.google.com");
+
+        FluentWait fluentWait = new FluentWait(driver);
+
+        fluentWait.withTimeout(Duration.ofSeconds(10L));
+        fluentWait.pollingEvery(Duration.ofSeconds(2L));
+        fluentWait.ignoring(NoSuchElementException.class);
+
+        Instant start = Instant.now();
+
+        try{
+            fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.id("algo")));
+        }
+        catch (Exception ex){
+            System.out.println("******** exception *******: " + ex.getMessage());
+        }
+        Instant end = Instant.now();
+        Duration timeElapsed = Duration.between(start, end);
+        System.out.println("************************");
+        System.out.println("time fluent: " + timeElapsed.getSeconds() + " seconds");
+        System.out.println("************************");
+        
+    }
+
+
 
 
 
