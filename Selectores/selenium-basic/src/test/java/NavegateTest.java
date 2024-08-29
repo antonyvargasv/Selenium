@@ -250,9 +250,38 @@ public class NavegateTest {
         System.out.println("************************");
         System.out.println("time fluent: " + timeElapsed.getSeconds() + " seconds");
         System.out.println("************************");
-        
+
     }
 
+//Navegar a una URL String con el index de forma local.
+    @Test
+    public void navegarURLLocal() throws InterruptedException {
+        driver.navigate().to("file://C://Users//Antony//Downloads//formcontact.html");
+        WebElement select = driver.findElement(By.xpath("//select[@id='id_contact']"));
+        Select sel = new Select(select);
+        sel.selectByIndex(2);
+
+        WebElement email = driver.findElement(By.xpath("//input[@id='email']"));
+        email.sendKeys("antony@gmail.com");
+
+        WebElement order = driver.findElement(By.xpath("//input[@id='id_order']"));
+        order.sendKeys("8");
+
+        WebElement mensaje = driver.findElement(By.xpath("//textarea[@id='message']"));
+        mensaje.sendKeys("mensaje de prueba");
+
+        Thread.sleep(3000);
+        WebElement btn = driver.findElement(By.xpath("//button[@type='submit']"));
+        btn.click();
+
+        String msj = driver.findElement(By.xpath("//p[@class='alert alert-success']")).getText();
+
+        System.out.println("el mensaje es: ********: "+msj);
+        assertTrue(msj.contains("Your message has been successfully sent to our"),"se espera que el mensaje tenga:Your message has been successfully sent to our, sin embargo fue enviado"+msj);
+
+
+
+    }
 
 
 
