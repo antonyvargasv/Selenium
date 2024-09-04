@@ -1,5 +1,7 @@
 package pageObjects;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -61,6 +63,5 @@ public class ContactUSPageFactory {
         assertTrue(msj.contains(expectedText), "se espera que el mensaje tenga: "+expectedText+" , sin embargo fue enviado: "+msj);
 
     }
-
 
 }

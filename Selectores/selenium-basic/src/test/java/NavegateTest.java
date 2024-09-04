@@ -1,11 +1,9 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -16,6 +14,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.time.Instant;
 
+
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -283,9 +284,81 @@ public class NavegateTest {
 
     }
 
+    //Ejemplos Asserts:
+    @Test
+    public void assertExamples(){
+        String actual = "pepito";
+        String expected ="pepito";
+        Assertions.assertTrue(actual.contains(expected),"se espera recibir el valor de: "+expected+" sin embargo se envió: "+actual);
+        Assertions.assertEquals(3,3);
+    }
+
+//Manejo de listas: falta ========================================================
+    @Test
+    public void getElementsListas() {
+        driver.get("https://www.mercadolibre.com.pe/");
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10L,TimeUnit.SECONDS);
+        WebElement searchInput= driver.findElement(By.xpath("//input[@id='cb1-edit']"));
+        searchInput.sendKeys("guitarra electrica");
+        searchInput.sendKeys(Keys.ENTER);
+        List<WebElement>
+                results = driver.findElements(By.cssSelector("ol[class*='ui-search-layout'] li"));
+        System.out.println("cantidad****"+results.size());
+
+        By nameby = By.cssSelector("h2");
+        By priceBy = By.cssSelector("div span[class='andes-money-amount andes-money-amount--cents-superscript");
+
+        for (WebElement result: results){
+            System.out.println("+++++++++++++++++++++++++++");
+            // System.out.println("el nombre es: "+result.findElement(nameby).getText());
+            //System.out.println("el nombre es: "+result.findElement(priceBy).getText());
+            System.out.println("el nombre es: "+result.findElement(By.cssSelector("h2")).getText());
+            System.out.println("el nombre es: "+result.findElement(By.cssSelector("div span[class='andes-money-amount andes-money-amount--cents-superscript")).getText());
+        }
+
+    }
+
+    //Asertions con lista, elemento random y scroll de una pagina:
+    @Test
+    public void assertionsLista() {
+        driver.get("https://www.mercadolibre.com.pe/");
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10L, TimeUnit.SECONDS);
+        WebElement searchInput = driver.findElement(By.xpath("//input[@id='cb1-edit']"));
+        searchInput.sendKeys("guitarra electrica");
+        searchInput.sendKeys(Keys.ENTER);
+        List<WebElement>
+                results = driver.findElements(By.cssSelector("ol[class*='ui-search-layout'] li"));
+
+        Random rand = new Random();
+        //El results.size indica el valor máximo que podría tener el elemento random:
+        WebElement randomElement = results.get(rand.nextInt(results.size()));
+        String expectedPrice = randomElement.findElement(By.cssSelector("div span[class='andes-money-amount andes-money-amount--cents-superscript")).getText();
+        String expectedName = randomElement.findElement(By.cssSelector("h2")).getText();
+
+        System.out.println("valor expectedPrice****"+expectedPrice);
+        System.out.println("valor expectedName****"+expectedName);
+
+        //Con JS se genera el scroll para realizar click al element random:
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();", randomElement);
+        randomElement.click();
+
+
+       String actualPrice = driver.findElement(By.xpath("//span[@itemprop='offers']")).getText();
+       String actualName = driver.findElement(By.xpath("//h1[@class='ui-pdp-title']")).getText();
+
+       Assertions.assertAll(
+               () -> Assertions.assertEquals(expectedPrice, actualPrice,"price dont match"),
+               () -> Assertions.assertEquals(expectedName,actualName,"name dont match")
+        );
 
 
 
+
+
+    }
 
 
 
@@ -294,6 +367,23 @@ public class NavegateTest {
 
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

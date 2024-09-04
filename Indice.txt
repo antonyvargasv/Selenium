@@ -2,18 +2,42 @@ ALT+CTRL+L -> IDENTAR/ESPACIO DEL CODIGO
 
 
 1: Selectores -> selenium-basic (gradle -> dependencias de Selenium Java y WebDriverManager)
-	-Xpath,CSS selector
-	-Assert()
-	-Manejo de Select
-	-Esperas (Implicitas,Explicitas,fluent)
-	-Radiobutton falta***
-	-
+	===(  NavegateTest.java   // Cada ejercicio se ejecuta por un @Test )====
 
-
-
+		-Xpath,CSS selector
+		-Assert()
+		-Manejo de Select
+		-Esperas (Implicitas,Explicitas,fluent)
+		-Navegar a una URL Sring con el index local, capturar un string de webelement + Ejercicio formulario básico ContactUS y assert.
+		-Ejemplo de assert.
+		-Manejo de listas, assert de valores de una lista, recorrido de lista, ejemplo de scroll con JS.
+		-lista y Random
+		-Radiobutton falta***
+		-
+		
+	===(  Package pageObjects - Ejercicio de contactUS con page Object y Page Factory    )====
+		-Creación de pagina ContactUS con o sin Factory + pageFactory y runner para ejecutar solo la pagina de ContactUS.
+		
+	===(  Refactorizar a pagePbject el ejemplo de listas y se utiliza el RANDOM )====
+		HomePage -> pagina donde realiza la busqueda de guitarra.
+		ResultsPage -> pagina donde se lista las guitarras y con la opcion random se elige un elemento de la lista
+		DetailsPage -> pagina donde se visualiza el detalle del elemento seleccionado para realizar la validación.
+		ResultModel -> Clase para settear valores de nombre y precio y crea un modelo del dato para realizar el assert.
+		ListaMercadoRunner -> pagina donde se crea la instancia de los objetos y se ejecuta.
+		BaseWebTest -> Se centraliza el Before y el After.
+		
+		
+		
+		
 	
+		
 
 
+
+
+	https://rahulshettyacademy.com/AutomationPractice/
+
+https://automationexercise.com/test_cases#collapse6
 
 Paginas para practicar: https://federico-toledo.com/sitios-de-prueba-para-practicar/
 //**Paginasdeprueba:
